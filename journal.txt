@@ -1,0 +1,15 @@
+LU'S JOURNAL
+============
+
+You found the secret book!
+
+Write new entries at the top, newest first. Open this file in any text editor
+(TextEdit in plain-text mode, Notepad, VS Code), type, and save.
+
+Heads up: once the site is online, anyone who finds this file can read it.
+
+------------------------------------------------------------
+
+2026-11-25
+
+First entry goes here.

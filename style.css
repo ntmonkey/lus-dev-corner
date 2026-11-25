@@ -332,3 +332,7 @@ summary { cursor: pointer; color: var(--amber); }
 
 .pano-badge { position: absolute; left: 8px; bottom: 8px; display: flex; align-items: center; gap: 6px; padding: 3px; background: rgba(11, 27, 28, 0.88); box-shadow: 0 0 0 2px var(--line); color: var(--amber); font-family: var(--display); font-size: 10px; line-height: 1; pointer-events: none; }
 .pano-badge canvas { width: 27px !important; height: auto !important; }
+
+/* the secret journal link over the book on the desk */
+.journal-link { position: absolute; display: block; cursor: pointer; }
+.journal-link:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }

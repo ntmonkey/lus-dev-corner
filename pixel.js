@@ -709,9 +709,19 @@
     }
 
     function drawDeskItems(t) {
-      R(4, 75, 14, 3, "#4d8dff"); R(7, 75, 5, 1, "#c9c3d9");
-      R(5, 72, 14, 3, "#ff4d6d"); R(8, 72, 5, 1, "#c9c3d9");
-      R(4, 69, 14, 3, "#ffd23f"); R(7, 69, 5, 1, "#c9c3d9");
+      /* the journal: a small purple book with a yellow shield crest on the right end (it is also a secret link, see the end of startScene) */
+      var BOOK = [
+        "kkkkkkkkkkkkkkkkk",
+        "kdppppppppppyyypk",
+        "kdppppppppppyyypk",
+        "kdppppppppppyyypk",
+        "kdpppppppppppyppk",
+        "kccccccccccccccck"
+      ];
+      var BOOK_PAL = { k: "#4b2278", d: "#6a35a8", p: "#8a4fd0", y: "#ffd23f", c: "#f1e8d0" };
+      for (var by = 0; by < BOOK.length; by++) {
+        for (var bx = 0; bx < BOOK[by].length; bx++) R(2 + bx, 73 + by, 1, 1, BOOK_PAL[BOOK[by].charAt(bx)]);
+      }
       /* coffee mug: black, white and red band, lots of steam */
       R(119, 69, 8, 10, "#101214");
       R(127, 71, 3, 5, "#101214");
@@ -753,6 +763,23 @@
       drawKeyboard();
       drawDeskFront();
     }
+
+    /* easter egg: an invisible link over the journal opens journal.txt. Box is the book plus 1px: x1 y72 19x7 in scene pixels. */
+    var wrap = document.createElement("div");
+    wrap.style.position = "relative";
+    cv.parentNode.insertBefore(wrap, cv);
+    wrap.appendChild(cv);
+    var journal = document.createElement("a");
+    journal.href = "journal.txt";
+    journal.target = "_blank";
+    journal.rel = "noopener";
+    journal.className = "journal-link";
+    journal.setAttribute("aria-label", "Journal (opens a text file)");
+    journal.style.left = (1 / W * 100) + "%";
+    journal.style.top = (72 / H * 100) + "%";
+    journal.style.width = (19 / W * 100) + "%";
+    journal.style.height = (7 / H * 100) + "%";
+    wrap.appendChild(journal);
 
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     draw(3.2);

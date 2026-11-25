@@ -110,10 +110,11 @@ window.PROJECTS = [
     status: "building",
     progress: 20,
     tags: ["hardware", "AI", "firmware"],
-    blurb: "Using AI to write programs for tiny Waveshare computers. Prompt goes in, blinking pixels come out.",
-    updated: "2026-11-18",
+    blurb: "Using AI to write programs for tiny Waveshare computers. Prompt goes in, blinking pixels come out. Next project: a bigger, more capable device with a battery, so it can be portable.",
+    updated: "2026-11-25",
     links: [],
     log: [
+      { date: "2026-11-25", note: "Next project: I want to invest in a larger, more capable device with a battery so it can be portable. It would work a bit like a Tamagotchi and also as a digital pocket watch, with some interesting features." },
       { date: "2026-11-18", note: "Finished the One-Button RSVP Reader: flashes a book's words at up to 800 wpm, all controlled with a single button." },
       { date: "2026-11-16", note: "Tracker created. Real notes go here." }
     ]
@@ -136,12 +137,13 @@ window.PROJECTS = [
   {
     name: "This Website",
     status: "building",
-    progress: 80,
+    progress: 60,
     tags: ["web", "pixel art"],
-    blurb: "The site you are on. Home, About, Blog, Projects and Photos pages are live, with a pixel-art dev room, a tiny lane-crossing game on the monitor, and video support for projects and posts.",
-    updated: "2026-11-18",
+    blurb: "The site you are on. Home, About, Blog, Projects and Photos pages are live, with a pixel-art dev room, a tiny lane-crossing game on the monitor, and video support for projects and posts. Next up: a shop that can take payments, for stickers and whatever else the community wants, maybe even some of the Waveshare projects.",
+    updated: "2026-11-25",
     links: [],
     log: [
+      { date: "2026-11-25", note: "Reset progress to about 60%. Planned next: a shop that can receive payment, selling stickers and whatever else the community wants, and maybe some of the Waveshare projects." },
       { date: "2026-11-18", note: "About page filled in with the real story. Added the Photos gallery, a frog game on the monitor, and video support." },
       { date: "2026-11-16", note: "First version of all four pages." }
     ]
