@@ -3,13 +3,13 @@ LU'S JOURNAL
 
 You found the secret book!
 
-Write new entries at the top, newest first. Open this file in any text editor
-(TextEdit in plain-text mode, Notepad, VS Code), type, and save.
-
-Heads up: once the site is online, anyone who finds this file can read it.
-
-------------------------------------------------------------
-
 2026-11-25
 
-First entry goes here.
+Congrats, you've found the secret Journal.  Often times I want to write more personal things that helps me work through ideas or thoughts.
+One big conflict I've had is the usage of AI in helping me build this site.  Over time, I've gone back and hand-coded things because it was designed to be easy to edit, hence the pixel art style.
+I've learned a lot and rekindled the love of what the web used to be.  I hope I don't get flamed too much because with the AI kickstart, I might have not done this at all.  
+The web used to be where people shared things and it felt personal long before the influx of social media and algorithms driving everything.
+And so if no one reads this, great.  If people find it useful, also great.  I feel the web is just a bit too polished, catered, and aggressive these days.  Personally the pursuit of clicks and likes to me are
+something detrimental to the authenticity that we can bring to the web.  People get criticized and audiences get upset when creator 'deviate' from their known brand and I find that kinda sad.  Humans are multi-faceted,
+complex, and full of multitudes.  How will we find another Renaissance man or woman like Davinci if we just keep putting people in boxes forever?  Anyway, here's to just simply sharing and hope others like it.
+
