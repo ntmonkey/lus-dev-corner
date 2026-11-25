@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lu's Dev Corner</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="index.html"><canvas data-sprite="computer" data-scale="auto" aria-hidden="true"></canvas> Lu's Dev Corner</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="projects.html">Projects</a>
+      <a href="photos.html">Photos</a>
+    </nav>
+  </header>
+
+  <div class="ticker" aria-hidden="true"><span id="ticker-text"></span></div>
+
+  <section class="hero">
+    <p class="eyebrow">Player 1 ready</p>
+    <h1>Lu's Dev Corner<span class="cursor">_</span></h1>
+    <p class="subtitle">Game dev, code &amp; tiny computers</p>
+    <p class="lede" id="tagline"></p>
+  </section>
+
+  <div class="window scene-window">
+    <div class="titlebar"><span>devroom.exe</span><span class="btns">_ x</span></div>
+    <canvas id="scene" class="scene" width="160" height="96" role="img" aria-label="Pixel art of a desk at night with a retro ultrawide monitor running a tiny platformer and a steaming coffee mug. A neon sign reads Lu's Dev Corner, with a city window, a poster, floppy disks, a cartridge, a controller and a plant."></canvas>
+  </div>
+
+  <section class="quests" aria-label="Pages">
+    <a class="quest" href="blog.html">
+      <canvas data-sprite="floppy" data-scale="auto" aria-hidden="true"></canvas>
+      <h2>Devlog</h2>
+      <p>Progress notes, bugs, wins and lessons from the work.</p>
+    </a>
+    <a class="quest" href="projects.html">
+      <canvas data-sprite="gem" data-scale="auto" aria-hidden="true"></canvas>
+      <h2>Projects</h2>
+      <p>Everything in progress, with status and a dev log for each.</p>
+    </a>
+    <a class="quest" href="photos.html">
+      <canvas data-sprite="camera" data-scale="auto" aria-hidden="true"></canvas>
+      <h2>Photos</h2>
+      <p>A gallery of pictures from behind the lens.</p>
+    </a>
+    <a class="quest" href="about.html">
+      <canvas data-sprite="player" data-scale="auto" aria-hidden="true"></canvas>
+      <h2>About</h2>
+      <p>Who is behind the keyboard.</p>
+    </a>
+  </section>
+
+  <div class="two-col">
+    <section>
+      <h2>Latest log</h2>
+      <div id="latest-posts"></div>
+    </section>
+    <section>
+      <h2>Now building</h2>
+      <div id="now-building"></div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <div class="badges" aria-hidden="true">
+      <span class="badge b1">MADE BY HAND</span>
+      <span class="badge b2">BEST ON CRT</span>
+      <span class="badge b3">NO TRACKERS</span>
+      <span class="badge b4">HTML+CSS+JS</span>
+    </div>
+    <p>Thanks for visiting. Insert coin to continue.</p>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+  document.getElementById("ticker-text").textContent = window.SITE.ticker.join("   ***   ");
+  document.getElementById("tagline").textContent = window.SITE.tagline;
+</script>
+<script src="pixel.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projects | Lu's Dev Corner</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="index.html"><canvas data-sprite="computer" data-scale="auto" aria-hidden="true"></canvas> Lu's Dev Corner</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="projects.html" aria-current="page">Projects</a>
+      <a href="photos.html">Photos</a>
+    </nav>
+  </header>
+
+  <h1>Projects</h1>
+  <p class="lede">Quest log. Edit status, progress and notes in data.js.</p>
+  <br>
+
+  <div id="project-stats" class="stats"></div>
+  <div id="status-filter" class="chips" aria-label="Filter by status"></div>
+  <div id="project-grid" class="grid"></div>
+</div>
+<script src="data.js"></script>
+<script src="pixel.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Photos | Lu's Dev Corner</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="index.html"><canvas data-sprite="computer" data-scale="auto" aria-hidden="true"></canvas> Lu's Dev Corner</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="projects.html">Projects</a>
+      <a href="photos.html" aria-current="page">Photos</a>
+    </nav>
+  </header>
+
+  <h1>Photos</h1>
+  <p class="lede">Pictures from behind the lens. Click one to see it bigger.</p>
+  <br>
+
+  <section id="upload-box" class="window upload-box" hidden>
+    <div class="titlebar"><span>upload.exe</span><span class="btns">_ x</span></div>
+    <div class="window-body">
+      <label for="file-input">Add photos (only you see this box)</label>
+      <input id="file-input" type="file" accept="image/*" multiple>
+      <div class="row">
+        <button id="upload-btn" class="btn" type="button">Upload</button>
+        <span id="upload-status" class="note" role="status"></span>
+      </div>
+    </div>
+  </section>
+
+  <p id="gallery-note" class="note">Loading photos...</p>
+  <div id="gallery" class="gallery"></div>
+</div>
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <img id="lb-img" alt="">
+  <p id="lb-caption" class="caption"></p>
+  <div id="lb-edit" hidden>
+    <textarea id="lb-text" rows="2" aria-label="Caption" placeholder="Write a caption"></textarea>
+    <div class="controls">
+      <button id="lb-save" class="btn" type="button">Save caption</button>
+      <button id="lb-delete" class="btn danger" type="button">Delete photo</button>
+    </div>
+  </div>
+  <div class="controls">
+    <button id="lb-prev" class="btn plain" type="button">&lt; Prev</button>
+    <button id="lb-close" class="btn plain" type="button">Close</button>
+    <button id="lb-next" class="btn plain" type="button">Next &gt;</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="pixel.js"></script>
+<script src="photos.js"></script>
+</body>
+</html>
