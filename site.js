@@ -89,6 +89,8 @@
         p.body.forEach(function (part) {
           if (typeof part === "string") {
             w.body.appendChild(el("p", "", part));
+          } else if (part.heading) {
+            w.body.appendChild(el("h3", "", part.heading));
           } else if (part.image) {
             var fig = el("figure", "post-image");
             var im = el("img");

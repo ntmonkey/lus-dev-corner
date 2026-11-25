@@ -5,7 +5,8 @@
   Add a new object to POSTS. Newest date shows first.
     - date:  "YYYY-MM-DD"
     - tags:  any words you like; the Blog page builds filter buttons from them
-    - body:  an array. A string is a paragraph. { code: "..." } is a code block.
+    - body:  an array. A string is a paragraph. { heading: "..." } is a section heading.
+             { code: "..." } is a code block.
 
   PROJECTS
   Add a new object to PROJECTS.
@@ -62,7 +63,7 @@ window.POSTS = [
       "Firing rays to trigger dialogue.  Creating UI for both healtbar and dialog box with UIToolKit.  Learning How to script the behavior of Dialog Boxes for triggering and display timer.",
       "This part was fun, but a bit tedious.  I can see managing dialogue based on certain states in the game or relationships between characters can get complex quickly.",
       "We're close to the end, but I feel like we have all the pieces to make an NES jrpg or something.  Exciting...",
-      "Robot Repair Tutorial",
+      { heading: "Robot Repair Tutorial" },
       { image: "images/dialogueBoxes.png", caption: "Dialogue Boxes!!" },
       "So close to the end with functionality."
     ]
@@ -76,7 +77,7 @@ window.POSTS = [
       "First impressions of Unity is that it's thoughtful and clean.  The goal here is to build the muscle memory that will help us create the velocity needed to transform ideas into working game elements in the shortest time possible.",
       "Maybe it's just years of working with software, but it is nice to be back in something where you have to express your ideas in code and make those connections.  I feel like it also rewires in your brain hoping to reduce our reliance upon searching or AI",
 
-      "Robot Repair Tutorial",
+      { heading: "Robot Repair Tutorial" },
       { image: "images/robotRepairTut.jpg", caption: "Robot Repair Early WIP" },
       "At the tilemap stages and making fabs for later."
     ]

@@ -311,6 +311,8 @@ summary { cursor: pointer; color: var(--amber); }
 .window-body h2 { margin-bottom: 12px; }
 .window-body h3 { margin: 18px 0 10px; }
 .window-body h2 + h3 { margin-top: 0; }
+/* section headings inside blog posts: same size as the post title, in green */
+.post h3 { font-size: clamp(13px, 2.4vw, 16px); margin: 22px 0 12px; }
 .with-icon { display: inline-flex; align-items: center; gap: 10px; }
 .post-image { margin: 0 0 14px; max-width: 720px; }
 .post-image img { display: block; width: 100%; height: auto; box-shadow: 0 0 0 3px var(--line), 5px 5px 0 3px var(--ink); }
