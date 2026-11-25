@@ -6,7 +6,7 @@
   var PAL = {
     k: "#0b1b1c", w: "#f5efe0", r: "#ff4d6d", y: "#ffd23f", g: "#3ddc84", d: "#1e7a4c",
     b: "#4d8dff", s: "#c9c3d9", c: "#4de1ff", p: "#54989a", o: "#ff9f43", n: "#8b5a3c", e: "#f2c9a0", v: "#8a63ff", R: "#e63946", h: "#3a4f7a", m: "#a0aec0",
-    A: "#cf402d", B: "#b4b4b4", C: "#fdf8c3", D: "#464646", E: "#000000", F: "#65b5ea", G: "#ffffff"
+    A: "#cf402d", B: "#b4b4b4", C: "#fdf8c3", D: "#464646", E: "#000000", F: "#0a7cff", G: "#ffffff"
   };
 
   var SPRITES = {
