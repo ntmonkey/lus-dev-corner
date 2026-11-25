@@ -55,6 +55,19 @@ window.PHOTOS = [
 
 window.POSTS = [
   {
+    title: "Almost At the End of the Beginning!",
+    date: "2026-11-24",
+    tags: ["Unity"],
+    body: [
+      "Firing rays to trigger dialogue.  Creating UI for both healtbar and dialog box with UIToolKit.  Learning How to script the behavior of Dialog Boxes for triggering and display timer.",
+      "This part was fun, but a bit tedious.  I can see managing dialogue based on certain states in the game or relationships between characters can get complex quickly.",
+      "We're close to the end, but I feel like we have all the pieces to make an NES jrpg or something.  Exciting...",
+      "Robot Repair Tutorial",
+      { image: "images/dialogueBoxes.png", caption: "Dialogue Boxes!!" },
+      "So close to the end with functionality."
+    ]
+  },
+  {
     title: "Unity Mornings",
     date: "2026-11-18",
     tags: ["Unity"],
@@ -64,7 +77,7 @@ window.POSTS = [
       "Maybe it's just years of working with software, but it is nice to be back in something where you have to express your ideas in code and make those connections.  I feel like it also rewires in your brain hoping to reduce our reliance upon searching or AI",
 
       "Robot Repair Tutorial",
-      { image: "images/robotRepairTut.jpg", caption: "My rocket game prototype" },
+      { image: "images/robotRepairTut.jpg", caption: "Robot Repair Early WIP" },
       "At the tilemap stages and making fabs for later."
     ]
   },
