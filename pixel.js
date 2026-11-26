@@ -177,27 +177,91 @@
     }
   }
 
+  /* ---- idle animation for the robed character (the "player" sprite) ----
+     The eyes pulse from light blue to the saturated blue in PAL.F, the robed figure breathes (chest and
+     head rise one pixel, the hem stays put) and the skull on the left floats up and down.
+     Sprites listed in ANIMATED get 1 spare row above and below so there is room to move. */
+  var EYE_LIGHT = "#65b5ea";
+  var PAD = 1;
+  function lerpHex(a, b, f) {
+    var i, out = [];
+    for (i = 1; i <= 5; i += 2) {
+      var x = parseInt(a.substr(i, 2), 16), y = parseInt(b.substr(i, 2), 16);
+      out.push(Math.round(x + (y - x) * f));
+    }
+    return "rgb(" + out.join(",") + ")";
+  }
+  function drawPlayerFrame(ctx, rows, t) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    var breathUp = Math.sin(t * 3) > 0 ? 1 : 0;                   /* inhale 1s, exhale 1s */
+    var skullDy = Math.round(Math.sin(t * 2.6 + 0.8));            /* skull drifts -1, 0, +1 */
+    var eye = lerpHex(EYE_LIGHT, PAL.F, 0.5 + 0.5 * Math.sin(t * 4.2));   /* eye pulse, about 1.5s */
+    for (var r = 0; r < rows.length; r++) {
+      for (var c = 0; c < rows[r].length; c++) {
+        var ch = rows[r].charAt(c);
+        if (ch === "." || !PAL[ch]) continue;
+        ctx.fillStyle = ch === "F" ? eye : PAL[ch];
+        if (c <= 4 && r <= 5) {                                   /* the skull */
+          ctx.fillRect(c, PAD + r + skullDy, 1, 1);
+        } else if (r <= 10) {                                     /* head and chest: rise on the inhale */
+          ctx.fillRect(c, PAD + r - breathUp, 1, 1);
+          if (r === 10 && breathUp) ctx.fillRect(c, PAD + r, 1, 1);   /* fill the gap so the robe stretches */
+        } else {                                                  /* hem: stays on the floor */
+          ctx.fillRect(c, PAD + r, 1, 1);
+        }
+      }
+    }
+  }
+  var ANIMATED = { player: drawPlayerFrame };
+  var animList = [], animRunning = false;
+  function startAnimLoop() {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || animRunning) return;
+    animRunning = true;
+    var last = 0;
+    function tick(ms) {
+      if (ms - last >= 66) {
+        last = ms;
+        for (var i = 0; i < animList.length; i++) {
+          var a = animList[i];
+          if (document.body.contains(a.cv)) a.fn(a.cv.getContext("2d"), a.rows, ms / 1000);
+        }
+      }
+      window.requestAnimationFrame(tick);
+    }
+    window.requestAnimationFrame(tick);
+  }
+
   /* Fill every <canvas data-sprite="name" data-scale="3"> with its sprite. */
   function initIcons(root) {
     var list = (root || document).querySelectorAll("canvas[data-sprite]");
     for (var i = 0; i < list.length; i++) {
       var cv = list[i];
       if (cv.getAttribute("data-done")) continue;
-      var rows = SPRITES[cv.getAttribute("data-sprite")];
+      var name = cv.getAttribute("data-sprite");
+      var rows = SPRITES[name];
       if (!rows) continue;
+      var anim = ANIMATED[name];
+      var h = rows.length + (anim ? PAD * 2 : 0);     /* animated sprites get spare rows to move in */
       var attr = cv.getAttribute("data-scale") || "3";
       cv.width = rows[0].length;
-      cv.height = rows.length;
+      cv.height = h;
       if (attr === "auto") {
         /* one shared pixel size (--px in style.css) so every sprite matches the scene */
         cv.style.width = "calc(" + rows[0].length + " * var(--px))";
-        cv.style.height = "calc(" + rows.length + " * var(--px))";
+        cv.style.height = "calc(" + h + " * var(--px))";
       } else {
         var scale = parseInt(attr, 10);
         cv.style.width = rows[0].length * scale + "px";
-        cv.style.height = rows.length * scale + "px";
+        cv.style.height = h * scale + "px";
       }
-      drawSprite(cv.getContext("2d"), rows, 0, 0, 1);
+      if (anim) {
+        anim(cv.getContext("2d"), rows, 0);
+        animList.push({ cv: cv, rows: rows, fn: anim });
+        startAnimLoop();
+      } else {
+        drawSprite(cv.getContext("2d"), rows, 0, 0, 1);
+      }
       cv.setAttribute("data-done", "1");
     }
   }
