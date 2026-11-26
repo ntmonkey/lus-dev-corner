@@ -149,6 +149,22 @@ window.PROJECTS = [
     ]
   },
   {
+    name: "DIY Light Meter",
+    status: "idea",
+    progress: 0,
+    tags: ["hardware", "3D printing", "photography", "ESP32"],
+    blurb: "A handheld light meter for photography, built around an ESP32-based Waveshare board, a light sensor and a battery, in a 3D-printed case. It reads the light and tells me the exposure.",
+    updated: "2026-11-25",
+    links: [],
+    log: [
+      { date: "2026-11-25", note: "Plan: 1) Pick a Waveshare ESP32 board that exposes I2C pins and has a battery connector. 2) Breadboard it with a sensor and print lux to the screen. 3) Add the exposure math and a simple UI. 4) Calibrate against a trusted meter or phone app. 5) Add the battery and sleep mode. 6) Design and print the case, then log the build here." },
+      { date: "2026-11-25", note: "Sensor shortlist: OPT3001 or TSL2591 (wide range, handles bright sun, good accuracy); BH1750 is the cheap way to start but can max out in direct sun. All talk over I2C." },
+      { date: "2026-11-25", note: "The math: EV = log2(lux x ISO / C). With C around 250 for a flat incident sensor, EV at ISO 100 is log2(lux / 2.5). From the EV, show the aperture and shutter speed combos. Features to try: ISO setting, aperture or shutter priority, hold reading, ND filter compensation." },
+      { date: "2026-11-25", note: "Power: single-cell LiPo (500 to 1000 mAh) with the board's charger, and deep sleep between readings so it lasts. Show battery level on screen." },
+      { date: "2026-11-25", note: "3D printing: print a fit-check version in PLA first, then a final in matte black (less stray light), with a thin white translucent diffuser dome over the sensor. Keep the sensor a fixed distance under the dome and block side light." }
+    ]
+  },
+  {
     name: "Untitled Indie Game",
     status: "idea",
     progress: 0,

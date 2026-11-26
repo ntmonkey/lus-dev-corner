@@ -158,9 +158,12 @@ canvas { image-rendering: pixelated; display: block; }
   margin-bottom: 34px;
 }
 .quest {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  /* subgrid: the icon, title and text rows line up across all four cards */
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 10px;
+  align-content: start;
   min-width: 0;
   padding: 16px;
   background: var(--panel);
@@ -170,6 +173,8 @@ canvas { image-rendering: pixelated; display: block; }
 }
 .quest:hover { box-shadow: 0 0 0 3px var(--amber), 5px 5px 0 3px var(--ink); color: var(--fg); }
 .quest p { color: var(--dim); margin: 0; }
+.quest canvas { justify-self: start; align-self: end; }
+.quest h2 { color: var(--amber); align-self: start; }
 
 .two-col {
   display: grid;
