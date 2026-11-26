@@ -6,7 +6,7 @@
   var PAL = {
     k: "#0b1b1c", w: "#f5efe0", r: "#ff4d6d", y: "#ffd23f", g: "#3ddc84", d: "#1e7a4c",
     b: "#4d8dff", s: "#c9c3d9", c: "#4de1ff", p: "#54989a", o: "#ff9f43", n: "#8b5a3c", e: "#f2c9a0", v: "#8a63ff", R: "#e63946", h: "#3a4f7a", m: "#a0aec0",
-    A: "#cf402d", B: "#b4b4b4", C: "#fdf8c3", D: "#464646", E: "#000000", F: "#0a7cff", G: "#ffffff"
+    Q: "#5c3a26", A: "#cf402d", B: "#b4b4b4", C: "#fdf8c3", D: "#464646", E: "#000000", F: "#0a7cff", G: "#ffffff"
   };
 
   var SPRITES = {
@@ -31,14 +31,36 @@
       "yy....yy"
     ],
     floppy: [
-      "bbbbbbbk",
-      "bsssssbk",
-      "bsssssbk",
-      "bbbbbbbk",
-      "bbbbbbbk",
-      "bwwwwwbk",
-      "bwkwwwbk",
-      "bwwwwwbk"
+      "bbbbbbbbbbbbk",
+      "bbsssssssbbbk",
+      "bbsssssksbbbk",
+      "bbsssssksbbbk",
+      "bbsssssssbbbk",
+      "bbbbbbbbbbbbk",
+      "bbbbbbbbbbbbk",
+      "bbwwwwwwwwwbk",
+      "bbwwwwwwwwwbk",
+      "bbwkkkkkkwwbk",
+      "bbwwwwwwwwwbk",
+      "bbwkkkkwwwwbk",
+      "bbwwwwwwwwwbk"
+    ],
+    chest: [
+      ".kwQQQQQQQQQQQwk.",
+      ".kQQnnnnnnnnnQQk.",
+      ".kQQnnnnnnnnnQQk.",
+      ".kQQQQQoQQQQQQQk.",
+      "kyyyoyyywyoyyyyyk",
+      ".kyyyyoyyyyyoyyk.",
+      "kyyyyyyyyyyyyyyyk",
+      "kQQyyQQyyyQQyyQQk",
+      "knnyynnykynnyynnk",
+      "knnyynnykynnyynnk",
+      "knnyynnyyynnyynnk",
+      "knnyynnnnnnnyynnk",
+      "knnyynnnnnnnyynnk",
+      "kQQQQQQQQQQQQQQQk",
+      ".kkkkkkkkkkkkkkk."
     ],
     gem: [
       "..cccc..",
@@ -144,15 +166,19 @@
       "wwwwww......wwwwww"
     ],
     camera: [
-      "sssssssssss",
-      "scccsssssss",
-      "kkkkkrkkkkk",
-      "kkkkssskkkk",
-      "kkkscccskkk",
-      "kkkscwcskkk",
-      "kkkscccskkk",
-      "kkkkssskkkk",
-      "kkkkkkkkkkk"
+      "sssssssssssssssss",
+      "scccsssssssssssss",
+      "scccsssssssssssss",
+      "kkkkkkkkrkkkkkkkk",
+      "kkkkkkkkkkkkkkkkk",
+      "kkkkkkssssskkkkkk",
+      "kkkkkscccccskkkkk",
+      "kkkkkscccccskkkkk",
+      "kkkkksccwccskkkkk",
+      "kkkkkscccccskkkkk",
+      "kkkkkscccccskkkkk",
+      "kkkkkkssssskkkkkk",
+      "kkkkkkkkkkkkkkkkk"
     ],
     slime: [
       "..gggg..",
@@ -212,7 +238,66 @@
       }
     }
   }
-  var ANIMATED = { player: drawPlayerFrame };
+  /* the camera on the home page's Photos card fires its flash every 5.5 seconds (the canvas has data-anim="cameraFlash").
+     The flash star is bigger than the camera, so this canvas has spare room: 2 columns on the left and 3 rows on top. */
+  var CAM_L = 2, CAM_T = 3;
+  function drawCameraFlash(ctx, rows, t) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    for (var r = 0; r < rows.length; r++) {
+      for (var c = 0; c < rows[r].length; c++) {
+        var ch = rows[r].charAt(c);
+        if (ch === "." || !PAL[ch]) continue;
+        ctx.fillStyle = PAL[ch];
+        ctx.fillRect(CAM_L + c, CAM_T + r, 1, 1);
+      }
+    }
+    var ph = (t + 3) % 5.5;                       /* the first flash comes about 2.5s after the page loads */
+    /* dot(x, y): a pixel in camera coordinates; the flash window is at x 1 to 3, y 1 */
+    function dot(x, y, color) { ctx.fillStyle = color; ctx.fillRect(CAM_L + x, CAM_T + y, 1, 1); }
+    var i;
+    if (ph < 0.2) {                               /* full flash: a big star around the flash window */
+      for (i = -4; i <= 4; i++) {                 /* long horizontal and vertical arms, white in the middle, yellow at the tips */
+        var tip = Math.abs(i) > 2;
+        dot(2 + i, 1, tip ? "#fff6b0" : "#ffffff");
+        dot(2, 1 + i, tip ? "#fff6b0" : "#ffffff");
+      }
+      for (var dx = -1; dx <= 1; dx++) for (var dy = -1; dy <= 1; dy++) dot(2 + dx, 1 + dy, "#ffffff");   /* bright core */
+      dot(0, -1, "#fff6b0"); dot(4, -1, "#fff6b0"); dot(0, 3, "#fff6b0"); dot(4, 3, "#fff6b0");           /* diagonal sparkles */
+      dot(-1, -2, "#ffd23f"); dot(5, -2, "#ffd23f"); dot(-1, 4, "#ffd23f"); dot(5, 4, "#ffd23f");
+    } else if (ph < 0.4) {                        /* fading out: a smaller star */
+      for (i = -2; i <= 2; i++) {
+        dot(2 + i, 1, i === 0 ? "#ffffff" : "#fff6b0");
+        dot(2, 1 + i, i === 0 ? "#ffffff" : "#fff6b0");
+      }
+    }
+  }
+  /* the treasure chest on the home page's Projects card: sparkles twinkle on the gold (the canvas has data-anim="chestSparkle") */
+  var GLINTS = [[4, 5, 1.7, 0.0], [7, 4, 2.3, 0.9], [10, 5, 1.9, 1.4], [13, 4, 2.9, 0.4], [2, 5, 2.1, 1.8]];   /* x, y, seconds per twinkle, start offset */
+  function drawChestSparkle(ctx, rows, t) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    for (var r = 0; r < rows.length; r++) {
+      for (var c = 0; c < rows[r].length; c++) {
+        var ch = rows[r].charAt(c);
+        if (ch === "." || !PAL[ch]) continue;
+        ctx.fillStyle = PAL[ch];
+        ctx.fillRect(c, PAD + r, 1, 1);
+      }
+    }
+    function dot(x, y, color) { ctx.fillStyle = color; ctx.fillRect(x, PAD + y, 1, 1); }
+    for (var i = 0; i < GLINTS.length; i++) {
+      var g = GLINTS[i];
+      var ph = ((t + g[3]) % g[2]) / g[2];              /* 0 to 1 through this sparkle's cycle */
+      if (ph < 0.1) {                                   /* full twinkle: a little star */
+        dot(g[0], g[1], "#ffffff");
+        dot(g[0] - 1, g[1], "#fff6b0"); dot(g[0] + 1, g[1], "#fff6b0");
+        dot(g[0], g[1] - 1, "#fff6b0"); dot(g[0], g[1] + 1, "#fff6b0");
+      } else if (ph < 0.2) {                            /* fading: just the bright centre */
+        dot(g[0], g[1], "#ffffff");
+      }
+    }
+  }
+  var ANIMATED = { player: drawPlayerFrame, cameraFlash: drawCameraFlash, chestSparkle: drawChestSparkle };
+  var ANIM_PAD = { player: [0, 1, 0, 1], cameraFlash: [CAM_L, CAM_T, 0, 1], chestSparkle: [0, 1, 0, 1] };   /* spare pixels: left, top, right, bottom */
   var animList = [], animRunning = false;
   function startAnimLoop() {
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -241,19 +326,27 @@
       var name = cv.getAttribute("data-sprite");
       var rows = SPRITES[name];
       if (!rows) continue;
-      var anim = ANIMATED[name];
-      var h = rows.length + (anim ? PAD * 2 : 0);     /* animated sprites get spare rows to move in */
+      var key = cv.getAttribute("data-anim") || name;
+      var anim = ANIMATED[key];
+      var pad = anim ? ANIM_PAD[key] : [0, 0, 0, 0];   /* animated sprites get spare pixels to move in */
+      var w = rows[0].length + pad[0] + pad[2];
+      var h = rows.length + pad[1] + pad[3];
       var attr = cv.getAttribute("data-scale") || "3";
-      cv.width = rows[0].length;
+      cv.width = w;
       cv.height = h;
-      if (attr === "auto") {
-        /* one shared pixel size (--px in style.css) so every sprite matches the scene */
-        cv.style.width = "calc(" + rows[0].length + " * var(--px))";
-        cv.style.height = "calc(" + h + " * var(--px))";
+      if (attr.indexOf("auto") === 0) {
+        /* one shared pixel size (--px in style.css) so every sprite matches the scene.
+           "auto*1.6" means 1.6 times that size, to make a small sprite match the others' height */
+        var mult = parseFloat(attr.split("*")[1]) || 1;
+        var u = "var(--px) * " + mult;
+        cv.style.width = "calc(" + w + " * " + u + ")";
+        cv.style.height = "calc(" + h + " * " + u + ")";
+        if (pad[0]) cv.style.marginLeft = "calc(-" + pad[0] + " * " + u + ")";   /* keep the picture where it was */
       } else {
         var scale = parseInt(attr, 10);
-        cv.style.width = rows[0].length * scale + "px";
+        cv.style.width = w * scale + "px";
         cv.style.height = h * scale + "px";
+        if (pad[0]) cv.style.marginLeft = (-pad[0] * scale) + "px";
       }
       if (anim) {
         anim(cv.getContext("2d"), rows, 0);
